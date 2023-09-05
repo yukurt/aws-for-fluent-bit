@@ -36,12 +36,13 @@ void msleep(long msec)
 }
 
 int main()  {
-    int t = atoi(getenv("TIME"));
+    //int t = atoi(getenv("TIME"));
     int iteration = atoi(getenv("ITERATION"))*1000;
     int i = 0;
     int idCounter = 10000000;
 
-    while (i < t) {
+    //while (i < t) {
+    while (1) {
         int j = 0;
         long long startSeconds;
         long long endSeconds;

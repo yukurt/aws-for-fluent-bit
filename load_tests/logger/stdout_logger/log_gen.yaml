@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: log-gen
+  name: log-gen
+  namespace: metr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-gen
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: log-gen
+    spec:
+      containers:
+      - image: kurtyu/log_generator
+        imagePullPolicy: Always
+        name: log-gen
+        env:
+        - name: ITERATION
+          value: "50"
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 200Mi
+          requests:
+            cpu: 1000m
+            memory: 200Mi
