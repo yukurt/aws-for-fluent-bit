@@ -2,14 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: log-gen
-  name: log-gen
+    app: log-gen-eternal
+  name: log-gen-eternal
   namespace: metr
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: log-gen
+      app: log-gen-eternal
   strategy:
     rollingUpdate:
       maxSurge: 0
@@ -18,12 +18,12 @@ spec:
   template:
     metadata:
       labels:
-        app: log-gen
+        app: log-gen-eternal
     spec:
       containers:
-      - image: kurtyu/log_generator
+      - image: kurtyu/log_generator_eternal
         imagePullPolicy: Always
-        name: log-gen
+        name: log-gen-eternal
         env:
         - name: ITERATION
           value: "50"

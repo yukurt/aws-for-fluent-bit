@@ -38,6 +38,7 @@ void msleep(long msec)
 int main()  {
     //int t = atoi(getenv("TIME"));
     int iteration = atoi(getenv("ITERATION"))*1000;
+    int sleep_modulo = atoi(getenv("SLEEP_MODULO"));
     int i = 0;
     int idCounter = 10000000;
 
@@ -48,10 +49,15 @@ int main()  {
         long long endSeconds;
         startSeconds = timeInMilliseconds();
         while (j < iteration) {   
-            printf("%d_%lld_%s\n", idCounter, startSeconds, ONE_KB_TEXT);
+            printf("%d_%d_%lld_%s\n", j, idCounter, startSeconds, ONE_KB_TEXT);
             idCounter=idCounter+1;
             j=j+1;
+
+            if (j % sleep_modulo == 0) {
+                msleep(1000);
+            }
         }
+        break;
         i = i + 1;
         endSeconds = timeInMilliseconds();
         msleep(1000+startSeconds-endSeconds);

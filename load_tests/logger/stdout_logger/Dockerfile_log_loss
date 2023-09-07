@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN gcc -o logger log_generator.c
+RUN gcc -o logger log_generator_log_loss.c
 
 FROM alpine
 
@@ -14,4 +14,4 @@ COPY --from=build-env /app/logger /app/logger
 
 WORKDIR /app
 
-CMD ["/app/logger"] 
+CMD ["/app/logger"]

@@ -2,7 +2,7 @@
 
 # This script returns the growth rate of a file.
 
-monitored_file="$1"
+monitored_file="$(readlink -f "$1")"
 
 bytes_start=$(ls -l "$monitored_file" | cut -d ' ' -f 5)
 ms_start=$(date +%s%N | cut -b1-13)
