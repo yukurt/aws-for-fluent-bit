@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: log-gen-eternal
+  name: log-gen-eternal
+  namespace: metr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-gen-eternal
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: log-gen-eternal
+    spec:
+      containers:
+      - image: kurtyu/log_generator_eternal
+        imagePullPolicy: Always
+        name: log-gen-eternal
+        env:
+        - name: ITERATION
+          value: "50"
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 200Mi
+          requests:
+            cpu: 1000m
+            memory: 200Mi

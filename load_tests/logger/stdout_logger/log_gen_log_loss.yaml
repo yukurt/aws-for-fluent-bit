@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: log-gen-log-loss
+  namespace: metr
+  labels:
+    app: log-gen-log-loss
+spec:
+  containers:
+  - image: kurtyu/log_generator_log_loss
+    imagePullPolicy: Always
+    name: log-gen-log-loss
+    env:
+    - name: ITERATION
+      value: "50"
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 200Mi
+      requests:
+        cpu: 1000m
+        memory: 200Mi
+  restartPolicy: Never
